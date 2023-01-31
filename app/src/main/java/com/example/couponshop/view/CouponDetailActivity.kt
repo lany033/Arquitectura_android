@@ -1,4 +1,4 @@
-package com.example.couponshop
+package com.example.couponshop.view
 
 import android.content.Intent
 import android.net.Uri
@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.couponshop.model.Coupon
+import com.example.couponshop.R
 import com.example.couponshop.model.CouponResponse
 import com.example.couponshop.utils.Companion
 import com.squareup.picasso.Picasso

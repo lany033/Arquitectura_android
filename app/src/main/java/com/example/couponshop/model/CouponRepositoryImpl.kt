@@ -1,32 +1,18 @@
-package com.example.couponshop
+package com.example.couponshop.model
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.util.Log
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.couponshop.model.Coupon
-import com.example.couponshop.model.CouponResponse
+import com.example.couponshop.R
+import com.example.couponshop.presenter.CouponPresenter
 import com.example.couponshop.retrofit.Retrofit
-import com.google.gson.JsonElement
-import com.google.gson.JsonObject
+import com.example.couponshop.view.RecyclerCouponsAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
-
-    lateinit var couponSelected: CouponResponse.Offers
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        //VIEW
-        val rvCoupons: RecyclerView = findViewById(R.id.rvCoupons)
-        rvCoupons.layoutManager = LinearLayoutManager(this)
-        val coupons = ArrayList<CouponResponse.Offers>()
-
-        //CONTROLLER
+class CouponRepositoryImpl(var couponPresenter: CouponPresenter): CouponRepository {
+    //TODA LA LOGICA DE CONEXION
+    override fun getCouponsAPI() {
+        val coupons: ArrayList<Coupon>? = ArrayList<Coupon>()
         val retrofit = Retrofit()
         val apiService = retrofit.getClientService()
         val call = apiService.getCoupons()
@@ -46,15 +32,16 @@ class MainActivity : AppCompatActivity() {
                     var coupon = Coupon(jsonObject)
                     coupons.add(coupon)
                 }*/
-                for (cupon in response.body()?.offers!!) {
-                    coupons.add(cupon)
+                for (c in response.body()?.offers!!) {
+                    coupons?.add(c)
                 }
                 //VIEW
-                rvCoupons.adapter = RecyclerCouponsAdapter(coupons, R.layout.card_coupon)
+                couponPresenter.showCoupons(coupons)
             }
         })
 
 
     }
 
+    }
 }

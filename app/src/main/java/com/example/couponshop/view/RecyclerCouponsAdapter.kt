@@ -1,4 +1,4 @@
-package com.example.couponshop
+package com.example.couponshop.view
 
 import android.content.Intent
 import android.util.Log
@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.couponshop.R
 import com.example.couponshop.model.Coupon
 import com.example.couponshop.model.CouponResponse
 import com.example.couponshop.utils.Companion
 import com.squareup.picasso.Picasso
 
-class RecyclerCouponsAdapter(var coupons : ArrayList<CouponResponse.Offers>, var resource: Int) : RecyclerView.Adapter<RecyclerCouponsAdapter.CardCouponHolder>() {
+class RecyclerCouponsAdapter(var coupons: ArrayList<Coupon>, var resource: Int) : RecyclerView.Adapter<RecyclerCouponsAdapter.CardCouponHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CardCouponHolder {
         var view: View = LayoutInflater.from(p0!!.context).inflate(resource, p0, false)
